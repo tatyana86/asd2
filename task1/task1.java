@@ -97,7 +97,7 @@ class SimpleTree<T>
         List<SimpleTreeNode<T>> nodesByValue = new ArrayList<SimpleTreeNode<T>>();
         List<SimpleTreeNode<T>> expand = new ArrayList<SimpleTreeNode<T>>();
 
-        if(nodeForCheck == Root && nodeForCheck.NodeValue == val) {
+        if(nodeForCheck.NodeValue == val) {
             nodesByValue.add(nodeForCheck);
         }
         expand.addAll(nodeForCheck.Children);
@@ -143,6 +143,7 @@ class SimpleTree<T>
             count ++;
             return count;
         }
+
         for(SimpleTreeNode nodeChild : nodeForSearchLeaf.Children) {
             count += recursionLeafCount(nodeChild);
         }
@@ -171,5 +172,4 @@ class SimpleTree<T>
             System.out.println("Level of node with value " + node.NodeValue + " - " + recursionGetNodeLevel(node));
         }
     }
-
 }

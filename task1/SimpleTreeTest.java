@@ -90,13 +90,7 @@ class SimpleTreeTest {
     }
 
     @Test
-    public void findExistNode() {
-        List<SimpleTreeNode<Integer>> nodesByValue = fullSimpleTree.FindNodesByValue(9);
-        assertEquals(1, nodesByValue.size());
-    }
-
-    @Test
-    public void findRootNode() {
+    public void findExistRootNode() {
         SimpleTreeNode<Integer> root = new SimpleTreeNode<>(5, null);
         SimpleTree<Integer> simpleTree = new SimpleTree<>(root);
 
@@ -107,5 +101,24 @@ class SimpleTreeTest {
         assertEquals(1, nodesByValue5.size());
     }
 
+    @Test
+    public void findExistNodes() {
+        List<SimpleTreeNode<Integer>> nodesByValue9 = fullSimpleTree.FindNodesByValue(9);
+        List<SimpleTreeNode<Integer>> nodesByValue4 = fullSimpleTree.FindNodesByValue(4);
+        List<SimpleTreeNode<Integer>> nodesByValue3 = fullSimpleTree.FindNodesByValue(3);
+        List<SimpleTreeNode<Integer>> nodesByValue5 = fullSimpleTree.FindNodesByValue(5);
+        List<SimpleTreeNode<Integer>> nodesByValue7 = fullSimpleTree.FindNodesByValue(7);
+        List<SimpleTreeNode<Integer>> nodesByValue17 = fullSimpleTree.FindNodesByValue(17);
+        List<SimpleTreeNode<Integer>> nodesByValue22 = fullSimpleTree.FindNodesByValue(22);
+        List<SimpleTreeNode<Integer>> nodesByValue1 = fullSimpleTree.FindNodesByValue(1);
 
+        assertEquals(1, nodesByValue9.size());
+        assertEquals(1, nodesByValue4.size());
+        assertEquals(1, nodesByValue3.size());
+        assertEquals(1, nodesByValue5.size());
+        assertEquals(1, nodesByValue7.size());
+        assertEquals(1, nodesByValue17.size());
+        assertEquals(1, nodesByValue22.size());
+        assertEquals(0, nodesByValue1.size());
+    }
 }
