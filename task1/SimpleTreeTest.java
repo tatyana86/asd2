@@ -89,5 +89,23 @@ class SimpleTreeTest {
         fullSimpleTree.printNodesLevel();
     }
 
+    @Test
+    public void findExistNode() {
+        List<SimpleTreeNode<Integer>> nodesByValue = fullSimpleTree.FindNodesByValue(9);
+        assertEquals(1, nodesByValue.size());
+    }
+
+    @Test
+    public void findRootNode() {
+        SimpleTreeNode<Integer> root = new SimpleTreeNode<>(5, null);
+        SimpleTree<Integer> simpleTree = new SimpleTree<>(root);
+
+        List<SimpleTreeNode<Integer>> nodesByValue9 = simpleTree.FindNodesByValue(9);
+        assertEquals(0, nodesByValue9.size());
+
+        List<SimpleTreeNode<Integer>> nodesByValue5 = simpleTree.FindNodesByValue(5);
+        assertEquals(1, nodesByValue5.size());
+    }
+
 
 }

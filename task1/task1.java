@@ -97,6 +97,9 @@ class SimpleTree<T>
         List<SimpleTreeNode<T>> nodesByValue = new ArrayList<SimpleTreeNode<T>>();
         List<SimpleTreeNode<T>> expand = new ArrayList<SimpleTreeNode<T>>();
 
+        if(nodeForCheck == Root && nodeForCheck.NodeValue == val) {
+            nodesByValue.add(nodeForCheck);
+        }
         expand.addAll(nodeForCheck.Children);
 
         for(SimpleTreeNode node : expand) {
