@@ -1,9 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimpleTreeTest {
@@ -52,6 +49,8 @@ class SimpleTreeTest {
         fullSimpleTree.DeleteNode(node4_firstLevel);
         assertEquals(3, fullSimpleTree.Count());
         assertEquals(1, fullSimpleTree.LeafCount());
+
+        fullSimpleTree.DeleteNode(node22_secondLevel);
     }
 
     @Test
@@ -63,6 +62,20 @@ class SimpleTreeTest {
         simpleTree.DeleteNode(root);
         assertEquals(0, simpleTree.Count());
         assertEquals(0, simpleTree.LeafCount());
+    }
+
+    @Test
+    public void deleteTwoNodeTree() {
+        root.NodeValue = 12;
+        simpleTree.AddChild(root, node4_firstLevel);
+        simpleTree.DeleteNode(node4_firstLevel);
+
+        assertEquals(1, simpleTree.Count());
+        assertEquals(1, simpleTree.LeafCount());
+        assertNull(node4_firstLevel.Parent);
+
+        simpleTree.DeleteNode(root);
+        assertEquals(0, simpleTree.Count());
     }
 
     @Test

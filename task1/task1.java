@@ -29,6 +29,7 @@ class SimpleTree<T>
             ParentNode.Children = new ArrayList<SimpleTreeNode<T>>();
         }
         ParentNode.Children.add(NewChild);
+        NewChild.Parent = ParentNode;
     }
 
     public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
