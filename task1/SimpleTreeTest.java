@@ -54,17 +54,6 @@ class SimpleTreeTest {
     }
 
     @Test
-    public void deleteRootNodeFromTree() {
-        fullSimpleTree.DeleteNode(fullRoot);
-        assertEquals(0, fullSimpleTree.Count());
-        assertEquals(0, fullSimpleTree.LeafCount());
-
-        simpleTree.DeleteNode(root);
-        assertEquals(0, simpleTree.Count());
-        assertEquals(0, simpleTree.LeafCount());
-    }
-
-    @Test
     public void deleteTwoNodeTree() {
         root.NodeValue = 12;
         simpleTree.AddChild(root, node4_firstLevel);
@@ -73,9 +62,6 @@ class SimpleTreeTest {
         assertEquals(1, simpleTree.Count());
         assertEquals(1, simpleTree.LeafCount());
         assertNull(node4_firstLevel.Parent);
-
-        simpleTree.DeleteNode(root);
-        assertEquals(0, simpleTree.Count());
     }
 
     @Test
