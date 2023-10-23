@@ -33,7 +33,12 @@ class SimpleTree<T>
 
     public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
     {
-        NodeToDelete.Parent.Children.remove(NodeToDelete);
+        if(NodeToDelete == Root) {
+            NodeToDelete.NodeValue = null;
+        }
+        if(NodeToDelete != Root) {
+            NodeToDelete.Parent.Children.remove(NodeToDelete);
+        }
         NodeToDelete.Parent = null;
         NodeToDelete.Children = null;
     }
