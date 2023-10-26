@@ -185,4 +185,38 @@ class BSTTest {
         BSTFind<Integer> foundNode7 = testingBST.FindNodeByKey(7);
         assertFalse(foundNode7.NodeHasKey);
     }
+
+    @Test
+    public void deleteNodeAsOneLeftLeaf() {
+        BSTFind<Integer> foundNode10 = testingBST.FindNodeByKey(10);
+        assertFalse(foundNode10.NodeHasKey);
+        assertEquals(9, testingBST.Count());
+
+        assertTrue(testingBST.AddKeyValue(10, 10));
+
+        BSTFind<Integer> reFoundNode10 = testingBST.FindNodeByKey(10);
+        assertTrue(reFoundNode10.NodeHasKey);
+        assertEquals(node12_firstLevel, reFoundNode10.Node.Parent);
+        assertEquals(10, testingBST.Count());
+
+        assertTrue(testingBST.DeleteNodeByKey(10));
+        assertEquals(9, testingBST.Count());
+    }
+
+    @Test
+    public void deleteNodeAsOneRightLeaf() {
+        BSTFind<Integer> foundNode14 = testingBST.FindNodeByKey(14);
+        assertFalse(foundNode14.NodeHasKey);
+        assertEquals(9, testingBST.Count());
+
+        assertTrue(testingBST.AddKeyValue(14, 14));
+
+        BSTFind<Integer> reFoundNode14 = testingBST.FindNodeByKey(14);
+        assertTrue(reFoundNode14.NodeHasKey);
+        assertEquals(node12_firstLevel, reFoundNode14.Node.Parent);
+        assertEquals(10, testingBST.Count());
+
+        assertTrue(testingBST.DeleteNodeByKey(14));
+        assertEquals(9, testingBST.Count());
+    }
 }

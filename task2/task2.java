@@ -140,8 +140,8 @@ class BST<T>
         }
 
         // case, when node doesn't have children (node is leaf)
-        boolean isLeftLeaf = foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null && foundNode.Node.NodeKey == foundNode.Node.Parent.LeftChild.NodeKey;
-        boolean isRightLeaf = foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null && foundNode.Node.NodeKey == foundNode.Node.Parent.RightChild.NodeKey;
+        boolean isLeftLeaf = foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null && foundNode.Node.NodeKey < foundNode.Node.Parent.NodeKey;
+        boolean isRightLeaf = foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null && foundNode.Node.NodeKey > foundNode.Node.Parent.NodeKey;
 
         if(isLeftLeaf) {
             foundNode.Node.Parent.LeftChild = null;
