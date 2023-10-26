@@ -160,4 +160,29 @@ class BSTTest {
         assertEquals(9, testingBST.Count());
     }
 
+    @Test
+    public void deleteLastLeftNode() {
+        assertEquals(1, node2_secondLevel.LeftChild.NodeKey);
+        assertEquals(9, testingBST.Count());
+
+        assertTrue(testingBST.DeleteNodeByKey(1));
+        assertNull(node2_secondLevel.LeftChild);
+        assertEquals(8, testingBST.Count());
+
+        BSTFind<Integer> foundNode1 = testingBST.FindNodeByKey(1);
+        assertFalse(foundNode1.NodeHasKey);
+    }
+
+    @Test
+    public void deleteLastRightNode() {
+        assertEquals(7, node6_secondLevel.RightChild.NodeKey);
+        assertEquals(9, testingBST.Count());
+
+        assertTrue(testingBST.DeleteNodeByKey(7));
+        assertNull(node6_secondLevel.RightChild);
+        assertEquals(8, testingBST.Count());
+
+        BSTFind<Integer> foundNode7 = testingBST.FindNodeByKey(7);
+        assertFalse(foundNode7.NodeHasKey);
+    }
 }
