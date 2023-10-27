@@ -18,14 +18,6 @@ class BSTTest {
     BSTNode<Integer> node5_thirdLevel = new BSTNode<>(5, 5, node6_secondLevel);
     BSTNode<Integer> node7_thirdLevel = new BSTNode<>(7, 7, node6_secondLevel);
 
-
-    BSTNode<Integer> node10_secondLevel = new BSTNode<>(10, 10, node12_firstLevel);
-    BSTNode<Integer> node14_secondLevel = new BSTNode<>(14, 14, node12_firstLevel);
-    BSTNode<Integer> node9_thirdLevel = new BSTNode<>(9, 9, node10_secondLevel);
-    BSTNode<Integer> node11_thirdLevel = new BSTNode<>(11, 11, node10_secondLevel);
-    BSTNode<Integer> node13_thirdLevel = new BSTNode<>(13, 13, node14_secondLevel);
-    BSTNode<Integer> node15_thirdLevel = new BSTNode<>(15, 15, node14_secondLevel);
-
     @BeforeEach
     void fillTree() {
         root.LeftChild = node4_firstLevel;
@@ -136,7 +128,7 @@ class BSTTest {
 
         assertTrue(testingBST.DeleteNodeByKey(4));
         assertEquals(5, root.LeftChild.NodeKey);
-        assertNull(node6_secondLevel.LeftChild);
+        assertNull(node6_secondLevel.RightChild);
 
         BSTFind<Integer> reFoundNode4 = testingBST.FindNodeByKey(4);
         assertFalse(reFoundNode4.NodeHasKey);
@@ -187,7 +179,7 @@ class BSTTest {
     }
 
     @Test
-    public void deleteNodeAsOneLeftLeaf() {
+    public void deleteLastNodeAsOneLeftLeaf() {
         BSTFind<Integer> foundNode10 = testingBST.FindNodeByKey(10);
         assertFalse(foundNode10.NodeHasKey);
         assertEquals(9, testingBST.Count());
@@ -204,7 +196,7 @@ class BSTTest {
     }
 
     @Test
-    public void deleteNodeAsOneRightLeaf() {
+    public void deleteLastNodeAsOneRightLeaf() {
         BSTFind<Integer> foundNode14 = testingBST.FindNodeByKey(14);
         assertFalse(foundNode14.NodeHasKey);
         assertEquals(9, testingBST.Count());
@@ -218,5 +210,18 @@ class BSTTest {
 
         assertTrue(testingBST.DeleteNodeByKey(14));
         assertEquals(9, testingBST.Count());
+    }
+
+    @Test
+    public void deleteLastRootNode() {
+        BSTNode<Integer> lastRoot = new BSTNode<>(10, 10, null);
+        BST<Integer> testingBSTWithOnlyRoot = new BST<>(lastRoot);
+
+        BSTFind<Integer> foundNode10 = testingBSTWithOnlyRoot.FindNodeByKey(10);
+        assertTrue(foundNode10.NodeHasKey);
+        assertEquals(1, testingBSTWithOnlyRoot.Count());
+
+        assertTrue(testingBSTWithOnlyRoot.DeleteNodeByKey(10));
+        assertEquals(0, testingBSTWithOnlyRoot.Count());
     }
 }

@@ -140,58 +140,72 @@ class BST<T>
         }
 
         // case, when node doesn't have children (node is leaf)
-        boolean isLeftLeaf = foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null && foundNode.Node.NodeKey < foundNode.Node.Parent.NodeKey;
-        boolean isRightLeaf = foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null && foundNode.Node.NodeKey > foundNode.Node.Parent.NodeKey;
-
-        if(isLeftLeaf) {
-            foundNode.Node.Parent.LeftChild = null;
-            foundNode.Node.Parent = null;
-            return true;
-        }
-
-        if(isRightLeaf) {
-            foundNode.Node.Parent.RightChild = null;
-            foundNode.Node.Parent = null;
-            return true;
-        }
-
-        // case, when foundNode hasn't right child
-        boolean foundNodeHasRightChild = foundNode.Node.RightChild != null;
-        if(! foundNodeHasRightChild) {
-            BSTNode<T> maxNodeFromFoundNode = findMax(foundNode.Node.LeftChild);
-
-            replaceNodeKey(foundNode.Node, maxNodeFromFoundNode);
-            // if maxNodeFromFoundNode if leaf
-            if(maxNodeFromFoundNode.LeftChild == null) {
-                maxNodeFromFoundNode.Parent.RightChild = null;
-                maxNodeFromFoundNode.Parent = null;
-                return true;
-            }
-
-            // if maxNodeFromFoundNode has only left child
-            replaceNodeKey(maxNodeFromFoundNode, maxNodeFromFoundNode.LeftChild);
-            maxNodeFromFoundNode.LeftChild = null;
-
+        boolean foundNodeIsLeaf = foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null;
+        if(foundNodeIsLeaf) {
+            deleteLeaf(foundNode.Node);
             return true;
         }
 
         // case, when foundNode has right child
-        BSTNode<T> minNodeFromFoundNode = findMin(foundNode.Node.RightChild);
-
-        replaceNodeKey(foundNode.Node, minNodeFromFoundNode);
-
-        // if minNodeFromFoundNode if leaf
-        if(minNodeFromFoundNode.RightChild == null) {
-            minNodeFromFoundNode.Parent.LeftChild = null;
-            minNodeFromFoundNode.Parent = null;
+        boolean foundNodeHasRightChild = foundNode.Node.RightChild != null;
+        if(foundNodeHasRightChild) {
+            deleteNodeWithRightChild(foundNode.Node);
             return true;
         }
 
-        // if minNodeFromFoundNode has only right child
-        replaceNodeKey(minNodeFromFoundNode, minNodeFromFoundNode.RightChild);
-        minNodeFromFoundNode.RightChild = null;
-
+        // case, when foundNode hasn't right child
+        deleteNodeWithOUTRightChild(foundNode.Node);
         return true;
+    }
+
+    private void deleteLeaf(BSTNode<T> node) {
+        boolean isRoot = node == Root;
+        if(isRoot) {
+            Root = null;
+            return;
+        }
+
+        boolean isLeftLeaf = node.NodeKey < node.Parent.NodeKey;
+        if(isLeftLeaf) {
+            node.Parent.LeftChild = null;
+            node.Parent = null;
+            return;
+        }
+
+        node.Parent.RightChild = null;
+        node.Parent = null;
+    }
+
+    private void deleteNodeWithRightChild(BSTNode<T> node) {
+        BSTNode<T> minNodeFromNode = findMin(node.RightChild);
+        replaceNodeKey(node, minNodeFromNode);
+
+        // if minNodeFromNode is leaf
+        if(minNodeFromNode.RightChild == null) {
+            minNodeFromNode.Parent.RightChild = null;
+            minNodeFromNode.Parent = null;
+            return;
+        }
+
+        // if minNodeFromNode has only right child
+        replaceNodeKey(minNodeFromNode, minNodeFromNode.RightChild);
+        minNodeFromNode.RightChild = null;
+    }
+
+    private void deleteNodeWithOUTRightChild(BSTNode<T> node) {
+        BSTNode<T> maxNodeFromNode = findMax(node.LeftChild);
+
+        replaceNodeKey(node, maxNodeFromNode);
+        // if maxNodeFromNode is leaf
+        if(maxNodeFromNode.LeftChild == null) {
+            maxNodeFromNode.Parent.LeftChild = null;
+            maxNodeFromNode.Parent = null;
+            return;
+        }
+
+        // if maxNodeFromNode has only left child
+        replaceNodeKey(maxNodeFromNode, maxNodeFromNode.LeftChild);
+        maxNodeFromNode.LeftChild = null;
     }
 
     private void replaceNodeKey(BSTNode<T> deleteNode, BSTNode<T> newNode) {
@@ -220,5 +234,4 @@ class BST<T>
         }
         return 1;
     }
-
 }
