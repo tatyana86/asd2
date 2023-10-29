@@ -70,7 +70,7 @@ class BSTTest {
     @Test
     public void deepAllNodesPOST() {
         ArrayList<BSTNode> test = testingBST.DeepAllNodes(POST_ORDER);
-        List<Integer> expectedKeys = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 12, 8);
+        List<Integer> expectedKeys = Arrays.asList(1, 3, 2, 5, 7, 6, 4, 12, 8);
         List<Integer> actualKeys = new ArrayList<>();
 
         for(BSTNode node : test) {
@@ -83,7 +83,7 @@ class BSTTest {
     @Test
     public void deepAllNodesPRE() {
         ArrayList<BSTNode> test = testingBST.DeepAllNodes(PRE_ORDER);
-        List<Integer> expectedKeys = Arrays.asList(8, 1, 2, 3, 4, 5, 6, 7, 12);
+        List<Integer> expectedKeys = Arrays.asList(8, 4, 2, 1, 3, 6, 5, 7, 12);
         List<Integer> actualKeys = new ArrayList<>();
 
         for(BSTNode node : test) {

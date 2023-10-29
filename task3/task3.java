@@ -302,8 +302,8 @@ class BST<T>
         ArrayList<BSTNode> allNodes = new ArrayList<>();
 
         if (node != null) {
-            allNodes.addAll(deepInOrder(node.LeftChild));
-            allNodes.addAll(deepInOrder(node.RightChild));
+            allNodes.addAll(deepPostOrder(node.LeftChild));
+            allNodes.addAll(deepPostOrder(node.RightChild));
             allNodes.add(node);
         }
 
@@ -316,8 +316,8 @@ class BST<T>
 
         if (node != null) {
             allNodes.add(node);
-            allNodes.addAll(deepInOrder(node.LeftChild));
-            allNodes.addAll(deepInOrder(node.RightChild));
+            allNodes.addAll(deepPreOrder(node.LeftChild));
+            allNodes.addAll(deepPreOrder(node.RightChild));
         }
 
         return allNodes;
