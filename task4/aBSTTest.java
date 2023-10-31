@@ -54,12 +54,16 @@ class aBSTTest {
     public void addExistKey() {
         assertEquals(9, arrayTree.AddKey(31));
         assertEquals(14, arrayTree.AddKey(92));
+        assertEquals(31, arrayTree.Tree[9]);
+        assertEquals(92, arrayTree.Tree[14]);
     }
 
     @Test
     public void addNOT_ExistKeyIfExistEmptySlot() {
         assertEquals(3, arrayTree.AddKey(20));
         assertEquals(12, arrayTree.AddKey(65));
+        assertEquals(20, arrayTree.Tree[3]);
+        assertEquals(65, arrayTree.Tree[12]);
     }
 
     @Test
@@ -73,4 +77,12 @@ class aBSTTest {
         assertEquals(-1, arrayTree.AddKey(15));
         assertEquals(-1, arrayTree.AddKey(100));
     }
+
+    @Test
+    public void addKeyInEmptyTree() {
+        aBST emptyTree = new aBST(3);
+        assertEquals(0, emptyTree.AddKey(5));
+        assertEquals(5, emptyTree.Tree[0]);
+    }
+
 }

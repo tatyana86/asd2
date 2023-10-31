@@ -53,9 +53,11 @@ class aBST
         }
 
         if(foundIndex >= 0) {
+            Tree[foundIndex] = key;
             return foundIndex;
         }
         if(foundIndex < 0) {
+            Tree[-foundIndex] = key;
             return -foundIndex;
         }
         return -1;
