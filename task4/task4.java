@@ -2,7 +2,7 @@ import java.util.*;
 
 class aBST
 {
-    public Integer Tree []; // массив ключей
+    public Integer Tree [];
 
     public aBST(int depth)
     {
