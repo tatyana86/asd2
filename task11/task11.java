@@ -165,16 +165,16 @@ class SimpleGraph
 
         vertex[VFrom].Hit = true;
 
-        boolean isWayExist = recursionBreadFirstSearch(VFrom, VTo, wayByVertex, indexesOfNotHit);
+        boolean isWayExist = recursionBreadFirstSearch(VFrom, VTo, indexesOfNotHit);
 
         if(isWayExist) {
-            createWayVertex(VTo, wayByVertex);
+            createWayVertex(VFrom, VTo, wayByVertex);
         }
 
         return new ArrayList<>(wayByVertex);
     }
 
-    private boolean recursionBreadFirstSearch(int currentIndex, int bIndex, ArrayList<Vertex> way, Queue<Integer> indexesOfNotHit)
+    private boolean recursionBreadFirstSearch(int currentIndex, int bIndex, Queue<Integer> indexesOfNotHit)
     {
         for(int i = 0; i < vertex.length; i ++) {
             if(m_adjacency[currentIndex][i] == 0) {
@@ -190,7 +190,6 @@ class SimpleGraph
             if(i == bIndex) {
                 return true;
             }
-
         }
 
         if(indexesOfNotHit.size() == 0) {
@@ -198,19 +197,18 @@ class SimpleGraph
         }
 
         int nextIndex = indexesOfNotHit.dequeue();
-        if(! recursionBreadFirstSearch(nextIndex, bIndex, way, indexesOfNotHit)) {
+        if(! recursionBreadFirstSearch(nextIndex, bIndex, indexesOfNotHit)) {
             return false;
         }
 
         return true;
     }
 
-    private void createWayVertex(int index, ArrayList<Vertex> way) {
-
-        if(index == -1) {
+    private void createWayVertex(int indexFrom, int index, ArrayList<Vertex> way) {
+        way.add(0, vertex[index]);
+        if(index == indexFrom) {
             return;
         }
-        way.add(0, vertex[index]);
-        createWayVertex(vertex[index].lastIndex, way);
+        createWayVertex(indexFrom, vertex[index].lastIndex, way);
     }
 }
